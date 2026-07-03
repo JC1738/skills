@@ -1,0 +1,28 @@
+{
+  "mcpServers": {
+    "plane": {
+      "command": "uvx",
+      "args": ["plane-mcp-server", "stdio"],
+      "env": {
+        "PLANE_API_KEY": "<your-plane-api-key>",
+        "PLANE_WORKSPACE_SLUG": "<your-plane-workspace-slug>",
+        "PLANE_BASE_URL": "<your-plane-base-url>"
+      }
+    },
+    "appflowy-mcp": {
+      "command": "uv",
+      "args": [
+        "run", "--with", "fastmcp>=3.1.1", "--with", "python-dotenv",
+        "--with", "httpx", "--with", "pydantic", "--with", "appflowysdk",
+        "--with", "pycrdt>=0.10.0",
+        "python", "<path-to-your-appflowy-mcp-checkout>/main.py"
+      ],
+      "env": {
+        "APPFLOWY_EMAIL": "<your-appflowy-email>",
+        "APPFLOWY_PASSWORD": "<your-appflowy-password>",
+        "BASE_URL": "<your-appflowy-cloud-url>",
+        "APPFLOWY_MCP_DIR": "<path-to-your-appflowy-mcp-checkout>"
+      }
+    }
+  }
+}

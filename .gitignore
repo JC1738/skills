@@ -1,1 +1,8 @@
 node_modules
+
+# Local MCP server config — holds API keys / internal hosts, never publish
+.mcp.json
+
+# Python bytecode
+__pycache__/
+*.pyc
