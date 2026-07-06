@@ -142,6 +142,38 @@ nudge instead of an error.
 In a real repo with no row yet, run `/grill-with-context` — it interviews you and writes a fresh
 glossary + decisions into AppFlowy, then appends a registry row so future sessions auto-load it.
 
+## 9. (Separate trio) Personal Plane backlog skills — `plane-add` / `plane-review` / `plane-digest`
+
+Independent of the domain-context four: these run a self-hosted **Plane** workspace as a personal
+backlog (routed capture → organise/review → daily anti-rot digest). They need the `plane` MCP
+configured (step 2) and **one small config block** — no IDs are shipped in the skills.
+
+**Add a `## Plane store` block to your global `~/.claude/CLAUDE.md`** (mirrors the `## Domain store`
+block — one source, no drift), holding only your **project UUIDs**:
+
+```markdown
+## Plane store
+
+- projects: CT <your-catch-all-project-uuid> · AI <your-curated-project-uuid>
+- AI-repo allowlist: <repo-basename>, …   # cwds whose capture routes to the AI project
+```
+
+- **Get the UUIDs:** with the `plane` MCP running, ask Claude to call `list_projects` and report each
+  project's `id`. Put your default catch-all project first (the skills call it "CT") and an optional
+  curated second project as "AI" — rename to fit your setup.
+- **State + label UUIDs are deliberately NOT recorded here** — the skills discover them live via
+  `list_states` / `list_labels` each run (per-project, drift-proof), so the block stays tiny and never
+  goes stale.
+- **Your organizing labels are yours to define.** `plane-review`/`plane-digest` judge whether an item
+  is "organized" against each project's own set of *organizing* labels. The generic axis is
+  `repo:<name>` (repo-bound work) + `area:<…>` (repo-less/cross-cutting) — good for a catch-all
+  project. The author's second project also uses category labels (`integration`/`enablement`/`ui`/
+  `engine`/`foundation`); those are **just the author's example** — define whatever categories fit your
+  own second project, or use `repo:`/`area:` there too. The skills adapt to whatever labels you create.
+- **Daily digest (optional):** `plane-digest` only *produces* the summary; to run it daily, wrap it in
+  cron (or `/schedule`) and pick a delivery sink (a Slack DM to yourself, email, or a pinned Plane
+  comment).
+
 ---
 
 **Troubleshooting**
